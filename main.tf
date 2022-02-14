@@ -60,3 +60,6 @@ resource null_resource setup_gitops {
     }
   }
 }
+
+
+### This the modified
