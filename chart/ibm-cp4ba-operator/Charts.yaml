@@ -1,11 +1,10 @@
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: ibm-cp4a-operator-catalog-subscription
-  namespace: REPLACE_NAMESPACE
-spec:
-  channel: v21.3
-  name: ibm-cp4a-operator
-  installPlanApproval: Automatic
-  source: ibm-operator-catalog
-  sourceNamespace: openshift-marketplace  
+apiVersion: v2
+name: ibm-platform-navigator
+description: A Helm chart for Kubernetes
+type: application
+version: 0.1.1
+appVersion: "1.0"
+dependencies:
+  - name: ibm-cp4a-operator
+    version: 0.1.0
+    repository: https://charts.cloudnativetoolkit.dev
