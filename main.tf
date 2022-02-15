@@ -5,7 +5,7 @@ locals {
   service_url   = "http://${local.name}.${var.namespace}"
   values_content = {
   }
-  layer = "services"
+  layer = "services" 
   type  = "base"
   application_branch = "main"
   namespace = var.namespace
