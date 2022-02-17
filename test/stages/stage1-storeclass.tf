@@ -1,4 +1,4 @@
-module "cp4a-file-retain-gold-gid" {
+module "gitops-cp4a-file-retain-gold-gid" {
   source = "github.com/cloud-native-toolkit/terraform-gitops-ocp-storageclass"
 
   gitops_config = module.gitops.gitops_config
@@ -19,7 +19,7 @@ resource null_resource gitops_storage_class_gold {
   }
 }
 
-module "cp4a-file-retain-silver-gid" {
+module "gitops-cp4a-file-retain-silver-gid" {
   source = "github.com/cloud-native-toolkit/terraform-gitops-ocp-storageclass"
 
   gitops_config = module.gitops.gitops_config
@@ -41,7 +41,7 @@ resource null_resource gitops_storage_class_silver {
 }
 
 
-module "cp4a-file-retain-bronze-gid" {
+module "gitops-cp4a-file-retain-bronze-gid" {
   source = "github.com/cloud-native-toolkit/terraform-gitops-ocp-storageclass"
 
   gitops_config = module.gitops.gitops_config
