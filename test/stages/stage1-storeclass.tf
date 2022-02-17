@@ -6,17 +6,17 @@ module "cp4a-file-retain-gold-gid" {
   server_name = module.gitops.server_name
   
   name="cp4a-file-retain-gold-gid"
-  provisioner_name="vpc.block.csi.ibm.io"
-
-  parameter_list=[{key = "classVersion",value = "1"},{key = "csi.storage.k8s.io/fstype", value = "ext4"}, {key="encrypted",value="false"},{key="profile",value="10iops-tier"},{key="sizeRange",value="[10-2000]GiB]"}]
+  provisioner_name="ibm.io/ibmc-file"
+  vol_binding_mode="Immediate"
+  reclaim_policy="Retain"
+  parameter_list=[{key="type", value="Endurance"},{key = "iopsPerGB",value = "10"},{key = "sizeRange", value = "[20-4000]Gi"},{key="billingType",value="hourly"},{key="classVersion",value="2"},{key="gidAllocate",value="true"}]
 
 }
 
-resource null_resource gitops_sc_output {
+resource null_resource gitops_storage_class_gold {
   provisioner "local-exec" {
     command = "echo -n 'cp4a-file-retain-gold-gid' > git_sc_name_gold"
   }
-
 }
 
 module "cp4a-file-retain-silver-gid" {
@@ -34,6 +34,13 @@ module "cp4a-file-retain-silver-gid" {
 
 }
 
+resource null_resource gitops_storage_class_silver {
+  provisioner "local-exec" {
+    command = "echo -n 'cp4a-file-retain-silver-gid' > git_sc_name_silver"
+  }
+}
+
+
 module "cp4a-file-retain-bronze-gid" {
   source = "github.com/cloud-native-toolkit/terraform-gitops-ocp-storageclass"
 
@@ -47,4 +54,9 @@ module "cp4a-file-retain-bronze-gid" {
   reclaim_policy="Retain"
   parameter_list=[{key="type", value="Endurance"},{key = "iopsPerGB",value = "2"},{key = "sizeRange", value = "[20-12000]Gi"},{key="billingType",value="hourly"},{key="classVersion",value="2"},{key="gidAllocate",value="true"}]
 
+}
+resource null_resource gitops_storage_class_bronze {
+  provisioner "local-exec" {
+    command = "echo -n 'cp4a-file-retain-bronze-gid' > git_sc_name_bronze"
+  }
 }
