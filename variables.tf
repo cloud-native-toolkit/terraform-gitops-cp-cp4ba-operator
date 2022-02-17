@@ -67,6 +67,11 @@ variable "namespace" {
   type        = string
   description = "The namespace where the application should be deployed"
 }
+variable "storageclass_operator" {
+  type        = string
+  default="cp4a-file-retain-gold-gid"
+  description = "The storge class for the cp4ba operator"
+}
 
 variable "kubeseal_cert" {
   type        = string

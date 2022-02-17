@@ -21,6 +21,7 @@ variable "bootstrap_prefix" {
 
 variable "namespace" {
   type        = string
+  default = "cp4ba"
   description = "Namespace for tools"
 }
 
@@ -87,4 +88,20 @@ variable "kubeseal_namespace" {
 }
 
 variable "cp_entitlement_key" {
+}
+
+variable "channel" {
+  type        = string
+  description = "The channel that should be used to deploy the operator"
+  default     = "v21.1"
+}
+variable "catalog" {
+  type        = string
+  description = "The catalog source that should be used to deploy the operator"
+  default     = "ibm-operator-catalog"
+}
+variable "catalog_namespace" {
+  type        = string
+  description = "The namespace where the catalog has been deployed"
+  default     = "openshift-marketplace"
 }

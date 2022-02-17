@@ -20,6 +20,10 @@ versions:
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-namespace.git
             version: '>= 1.0.0'
+      - id: gitops_storeclass
+        refs: 
+          - source: github.com/cloud-native-toolkit/terraform-gitops-ocp-storageclass
+            version: '>= 1.0.0'           
     variables:
       - name: gitops_config
         moduleRef:

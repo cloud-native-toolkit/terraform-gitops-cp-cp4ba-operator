@@ -3,12 +3,28 @@ locals {
   subscription_name= "ibm-cp4a-operator"
   bin_dir       = module.setup_clis.bin_dir
   yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
+  yaml_dir_pvc      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}_pvc"
   service_url   = "http://${local.name}.${var.namespace}"
   subscription_chart_dir = "${path.module}/charts/ibm-cp4ba-operator"
 
   values_content = {
-
+    "ibm-ba-operator" = {
+      subscriptions = {
+        ibmcp4a = {
+          name = "ibm-cp4a"
+          subscription = {
+            channel             = var.channel
+            installPlanApproval = "Automatic"
+            name                = "ibm-cp4a-operator"
+            source              = var.catalog
+            sourceNamespace     = var.catalog_namespace
+          }
+        }
+      }
+    }
+    values_file = "values-${var.server_name}.yaml"
   }
+
   layer = "services" 
   type  = "base"
   application_branch = "main"
@@ -32,6 +48,7 @@ resource null_resource create_yaml {
 
 resource null_resource setup_gitops {
   depends_on = [null_resource.create_yaml]
+  
 
   triggers = {
     name = local.name
@@ -66,4 +83,59 @@ resource null_resource setup_gitops {
 }
 
 
-### This the modified
+
+resource null_resource gitops_sc_output {
+  provisioner "local-exec" {
+    command = "echo -n 'cp4a-file-retain-bronze-gid' > git_sc_name_silver"
+  }
+
+}
+
+### This the modified for operator pvc creation
+resource null_resource create_pvc_yaml {
+  provisioner "local-exec" {
+    command = "${path.module}/scripts/create-pvc-yaml.sh '${local.name}' '${local.yaml_dir_pvc}' '${var.storageclass_operator}'"
+
+    environment = {
+      VALUES_CONTENT = yamlencode(local.values_content)
+    }
+  }
+}
+
+resource null_resource setup_gitops_pvc {
+  depends_on = [null_resource.create_pvc_yaml]
+  
+
+  triggers = {
+    name = local.name
+    namespace = var.namespace
+    yaml_dir = local.yaml_dir_pvc
+    server_name = var.server_name
+    layer = "infrastructure"
+    git_credentials = yamlencode(var.git_credentials)
+    gitops_config   = yamlencode(var.gitops_config)
+    bin_dir = local.bin_dir
+  }
+
+  provisioner "local-exec" {
+    command = "${self.triggers.bin_dir}/igc gitops-module '${self.triggers.name}' -n '${self.triggers.namespace}' --contentDir '${self.triggers.yaml_dir}' --serverName '${self.triggers.server_name}' -l '${self.triggers.layer}' --type '${self.triggers.type}'"
+
+    environment = {
+      GIT_CREDENTIALS = nonsensitive(self.triggers.git_credentials)
+      GITOPS_CONFIG   = self.triggers.gitops_config
+    }
+  }
+
+  provisioner "local-exec" {
+    when = destroy
+    command = "${self.triggers.bin_dir}/igc gitops-module '${self.triggers.name}' -n '${self.triggers.namespace}' --delete --contentDir '${self.triggers.yaml_dir}' --serverName '${self.triggers.server_name}' -l '${self.triggers.layer}' --type '${self.triggers.type}'"
+
+    environment = {
+      GIT_CREDENTIALS = nonsensitive(self.triggers.git_credentials)
+      GITOPS_CONFIG   = self.triggers.gitops_config
+    }
+  }
+}
+
+
+##    
