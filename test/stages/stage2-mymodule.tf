@@ -9,5 +9,5 @@ module "gitops_module" {
   #storage_class_gold_name=module.cp4a-file-retain-gold-gid.storage_name
   #storage_class_silver_name=module.cp4a-file-retain-silver-gid.storage_name
   #storage_class_bronze_name=module.cp4a-file-retain-bronze-gid.storage_name
-  storageclass_operator=module.cp4a.cp4a-file-retain-gold-gid.storage_name
+  storageclass_operator=module.cp4a-file-retain-gold-gid.storage_name
 }
