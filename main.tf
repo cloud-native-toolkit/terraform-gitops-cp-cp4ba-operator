@@ -83,23 +83,6 @@ resource null_resource setup_gitops {
 }
 
 
-#### Just Tryig out will remove next 3 
-resource null_resource gitops_gold_class {
-  provisioner "local-exec" {
-    command = "echo -n 'cp4a-file-retain-gold-gid' > git_sc_name_gold"
-  }
-}
-resource null_resource gitops_silver_class {
-  provisioner "local-exec" {
-    command = "echo -n 'cp4a-file-retain-silver-gid' > git_sc_name_silver"
-  }
-}
-resource null_resource gitops_bronze_class {
-  provisioner "local-exec" {
-    command = "echo -n 'cp4a-file-retain-bronze-gid' > git_sc_name_bronze"
-  }
-}
-
 ### This the modified for operator pvc creation
 resource null_resource create_pvc_yaml {
   provisioner "local-exec" {
