@@ -86,7 +86,7 @@ resource null_resource setup_gitops {
 ### This the modified for operator pvc creation
 resource null_resource create_pvc_yaml {
   provisioner "local-exec" {
-    command = "${path.module}/scripts/create-pvc-yaml.sh '${local.name}' '${local.yaml_dir_pvc}' '${var.storageclass_operator}'"
+    command = "${path.module}/scripts/create-pvc-yaml.sh '${local.name}' '${local.yaml_dir_pvc}' '${var.storageclass_operator}' '${var.namespace}'" 
 
     environment = {
       VALUES_CONTENT = yamlencode(local.values_content)

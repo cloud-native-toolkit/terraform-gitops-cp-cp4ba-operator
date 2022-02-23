@@ -18,7 +18,7 @@ resource null_resource gitops_storage_class_gold {
     command = "echo -n 'cp4a-file-retain-gold-gid' > git_sc_name_gold"
   }
 }
-
+/*
 module "gitops-cp4a-file-retain-silver-gid" {
   source = "github.com/cloud-native-toolkit/terraform-gitops-ocp-storageclass"
 
@@ -60,3 +60,4 @@ resource null_resource gitops_storage_class_bronze {
     command = "echo -n 'cp4a-file-retain-bronze-gid' > git_sc_name_bronze"
   }
 }
+*/
