@@ -83,6 +83,8 @@ resource null_resource setup_gitops {
 }
 
 
+/*
+
 ### This the modified for operator pvc creation
 resource null_resource create_pvc_yaml {
   provisioner "local-exec" {
@@ -129,5 +131,10 @@ resource null_resource setup_gitops_pvc {
   }
 }
 
+
+
+
+
+*/
 
 ##    

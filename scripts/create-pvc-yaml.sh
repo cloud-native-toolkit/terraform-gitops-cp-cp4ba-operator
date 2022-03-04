@@ -50,12 +50,3 @@ spec:
       storage: 1Gi
 
 EOL
-
-PARMLENGTH=$(echo "${PARMS}" | jq '. | length')
-
-if [[ ${PARMLENGTH} != 0 ]]; then
-
-cat >> ${DEST_DIR}/pvc_operator.yaml << EOL
-parameters: $(echo "${PARMS}" | jq -c 'from_entries')
-EOL
-fi 
