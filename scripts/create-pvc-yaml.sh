@@ -14,7 +14,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: cp4a-shared-log-pvc
-  namespace:'${NAMESPACE}'
+  namespace: ${NAMESPACE}
   labels:
     app.kubernetes.io/instance: ibm-dba
     app.kubernetes.io/managed-by: ibm-dba
@@ -23,7 +23,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: '${STORAGECLASS}'
+  storageClassName: ${STORAGECLASS}
   resources:
     requests:
       storage: 100Gi
@@ -35,7 +35,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: operator-shared-pvc
-  namespace:'${NAMESPACE}'
+  namespace: ${NAMESPACE}
   labels:
     app.kubernetes.io/instance: ibm-dba
     app.kubernetes.io/managed-by: ibm-dba
@@ -44,7 +44,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: '${STORAGECLASS}'
+  storageClassName: ${STORAGECLASS}
   resources:
     requests:
       storage: 1Gi
