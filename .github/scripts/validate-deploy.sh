@@ -88,6 +88,12 @@ until kubectl get pvc "${PVCNAME2}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
   count=$((count + 1))
   sleep 20
 done
+echo "After the PVC forcibly sleeping for 2 mins"
+sleep 120
+echo "After the PVC forcibly sleeping for 2 mins"
+sleep 120
+echo "After the PVC forcibly sleeping for 2 mins"
+sleep 120
 
 count=0
 SUBSNAME="ibm-cp4a"
@@ -100,4 +106,5 @@ done
 kubectl get subscription "${SUBSNAME}" -n "${NAMESPACE}" || exit 1   
 
 cd ..
-rm -rf .testrepo 
+#Temporarily commented the remove repo
+#rm -rf .testrepo 
