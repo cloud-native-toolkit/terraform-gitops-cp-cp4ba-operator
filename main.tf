@@ -58,7 +58,7 @@ resource null_resource setup_gitops {
     layer = local.layer
     type = local.type
     git_credentials = yamlencode(var.git_credentials)
-    gitops_config   = yamlencode(var.gitops_config)
+    gitops_config   = yamlencode(var.gitops_config) 
     bin_dir = local.bin_dir
   }
 
