@@ -66,12 +66,7 @@ variable "git_credentials" {
 variable "namespace" {
   type        = string
   default = "cp4ba"
-  description = "The namespace where the application should be deployed"
-}
-variable "storageclass_operator" {
-  type        = string
-  default="cp4a-file-retain-gold-gid"
-  description = "The storge class for the cp4ba operator"
+  description = "The namespace where the application should be deployed" 
 }
 
 variable "kubeseal_cert" {
@@ -88,17 +83,25 @@ variable "server_name" {
 variable "channel" {
   type        = string
   description = "The channel that should be used to deploy the operator"
-  default     = "V21.1"
+  default     = "V1.3"
 }
 variable "catalog" {
   type        = string
   description = "The catalog source that should be used to deploy the operator"
-  default     = "ibm-operator-catalog"
+  default     = "ibm-operator-catalog"  
+  
 }
 variable "catalog_namespace" {
-  type        = string
+  type        = string   
   description = "The namespace where the catalog has been deployed"
   default     = "openshift-marketplace"
+}
+variable "storageclass_operator" {
+  type        = string
+  #default="cp4a-file-retain-gold-gid"
+  #default="ibmc-vpc-block-metro-retain-10iops-tier"
+  default="portworx-db2-rwx-sc"
+  description = "The storge class for operator pvc"
 }
 variable "storage_class_gold_name" {
   type        = string
