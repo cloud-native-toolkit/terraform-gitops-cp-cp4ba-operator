@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR=$(cd $(dirname "$0"); pwd -P)
-MODULE_DIR=$(cd "${SCRIPT_DIR}/.."; pwd -P)
-
 NAME="$1"
 CHART_DIR="$2"
-DEST_DIR="$3"
+NAMESPACE="$3"
+DEST_DIR="$4"
 #VALUES_FILE="$4"
 
 mkdir -p "${DEST_DIR}"

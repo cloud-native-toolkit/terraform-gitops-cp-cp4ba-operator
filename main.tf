@@ -3,7 +3,7 @@ locals {
   subscription_name= "ibm-cp4a-operator"
   bin_dir       = module.setup_clis.bin_dir
   yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
-  yaml_dir_pvc      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}_pvc"
+  yaml_dir_pvc      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}-pvc"
   service_url   = "http://${local.name}.${var.namespace}"
   subscription_chart_dir = "${path.module}/chart/cp4ba-operator"
   #chart_dir = "${path.module}/chart/ibm-cp4ba-operator"
@@ -40,7 +40,7 @@ module setup_clis {
 
 resource null_resource create_yaml {  
   provisioner "local-exec" {
-    command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.yaml_dir}' '${local.namespace}' '${local.subscription_chart_dir}' '${var.storageclass_operator}'"
+    command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.subscription_chart_dir}' '${local.namespace}'  '${local.yaml_dir}'"
 
     environment = {
       VALUES_CONTENT = yamlencode(local.values_content)
