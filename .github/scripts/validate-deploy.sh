@@ -5,6 +5,9 @@ GIT_TOKEN=$(cat git_token)
 
 export KUBECONFIG=$(cat .kubeconfig)
 echo "KUBE CONFIG ${KUBECONFIG}"
+PVCNAME1="cp4a-shared-log-pvc"
+PVCNAME2="operator-shared-pvc"
+
 NAMESPACE=$(cat .namespace)
 ##getting file not found for gitops-output.json so hard coding values
 #COMPONENT_NAME=$(jq -r '.name // "iaf-operator"' gitops-output.json)
@@ -66,12 +69,33 @@ until kubectl get subs "${SUBSNAME}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; d
   count=$((count + 1))
   sleep 15
 done
-
+count=0
 if [[ $count -eq 20 ]]; then
   echo "Timed out waiting for Subscription/${SUBSNAME} in ${NAMESPACE}"
   kubectl get all -n "${NAMESPACE}"
   exit 1
 fi
+
+count=0
+until kubectl get pvc "${PVCNAME1}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
+  echo "Waiting for PVC/${PVCNAME1} in ${NAMESPACE} COUNTER $count" 
+  count=$((count + 1))
+  sleep 20
+done
+count=0
+until kubectl get pvc "${PVCNAME2}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
+  echo "Waiting for PVC/${PVCNAME2} in ${NAMESPACE} COUNTER $count" 
+  count=$((count + 1))
+  sleep 20
+done
+
+count=0
+SUBSNAME="ibm-cp4a"
+until kubectl get subs "${SUBSNAME}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
+  echo "Waiting for Subscription/${SUBSNAME} in ${NAMESPACE}"
+  count=$((count + 1))
+  sleep 15
+done
 
 kubectl get subscription "${SUBSNAME}" -n "${NAMESPACE}" || exit 1   
 
