@@ -17,7 +17,7 @@ locals {
           subscription = {
             channel             = var.channel
             installPlanApproval = "Automatic"
-            name                = "ibm-cp4a-operator" 
+            name                = "ibm-cp4a-operator"
             source              = var.catalog
             sourceNamespace     = var.catalog_namespace
           }
@@ -41,8 +41,8 @@ module setup_clis {
 resource null_resource create_yaml {  
   
   provisioner "local-exec" {
-    command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.subscription_chart_dir}' '${local.namespace}'  '${local.yaml_dir}'"
-    #command = "${path.module}/scripts/create-yaml.sh '${local.name}'"
+    #command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.subscription_chart_dir}' '${local.namespace}'  '${local.yaml_dir}'"
+    command = "${path.module}/scripts/create-yaml.sh '${local.name}'"
     environment = {
       VALUES_CONTENT = yamlencode(local.values_content)
       
@@ -88,22 +88,4 @@ resource null_resource setup_gitops {
 }
   
 
-  provisioner "local-exec" {
-    command = "${self.triggers.bin_dir}/igc gitops-module '${self.triggers.name}' -n '${self.triggers.namespace}' --contentDir '${self.triggers.yaml_dir}' --serverName '${self.triggers.server_name}' -l '${self.triggers.layer}' "
-    
-    environment = {
-      GIT_CREDENTIALS = nonsensitive(self.triggers.git_credentials)
-      GITOPS_CONFIG   = self.triggers.gitops_config
-    }
-  }
-
-  provisioner "local-exec" {
-    when = destroy
-    command = "${self.triggers.bin_dir}/igc gitops-module '${self.triggers.name}' -n '${self.triggers.namespace}' --delete --contentDir '${self.triggers.yaml_dir}' --serverName '${self.triggers.server_name}' -l '${self.triggers.layer}' "
-
-    environment = {
-      GIT_CREDENTIALS = nonsensitive(self.triggers.git_credentials)
-      GITOPS_CONFIG   = self.triggers.gitops_config
-    }
-  }
-}
+  ### This the modified for operator pvc creation
