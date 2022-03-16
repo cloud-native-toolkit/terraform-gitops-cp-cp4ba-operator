@@ -51,6 +51,7 @@ resource null_resource create_yaml {
 }
 
 
+
 resource null_resource setup_gitops {
   
   depends_on = [null_resource.setup_gitops_pvc,null_resource.create_yaml]
