@@ -26,7 +26,7 @@ spec:
   storageClassName: ${STORAGECLASS}
   resources:
     requests:
-      storage: 25Gi
+      storage: 5Gi 
 EOL
 
 cat > "${DEST_DIR}/pvc_operator_shared.yaml" << EOL
