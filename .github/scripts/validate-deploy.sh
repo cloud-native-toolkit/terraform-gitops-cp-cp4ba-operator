@@ -103,7 +103,7 @@ until kubectl get subs "${SUBSNAME}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; d
   sleep 15
 done
 
-kubectl get subscription "${SUBSNAME}" -n "${NAMESPACE}" || exit 1   
+kubectl get subscription "${SUBSNAME}" -n "${NAMESPACE}" || exit 1  
 
 cd ..
 #Temporarily commented the remove repo
