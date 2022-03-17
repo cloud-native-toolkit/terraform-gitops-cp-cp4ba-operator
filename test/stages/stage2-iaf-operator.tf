@@ -1,4 +1,4 @@
-/*
+
 module "gitops_iaf_operator" {
    source = "github.com/cloud-native-toolkit/terraform-gitops-cp4ba-operator"
 
@@ -8,4 +8,4 @@ module "gitops_iaf_operator" {
    namespace = module.gitops_namespace.name
    kubeseal_cert = module.gitops.sealed_secrets_cert
  }
- */
+ 
