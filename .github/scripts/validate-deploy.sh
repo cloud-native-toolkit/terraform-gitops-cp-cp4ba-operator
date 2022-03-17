@@ -89,11 +89,11 @@ until kubectl get pvc "${PVCNAME2}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
   sleep 20
 done
 echo "After the PVC forcibly sleeping for 2 mins"
-sleep 120
+#sleep 120
+#echo "After the PVC forcibly sleeping for 2 mins"
+#sleep 120
 echo "After the PVC forcibly sleeping for 2 mins"
-sleep 120
-echo "After the PVC forcibly sleeping for 2 mins"
-sleep 120
+#sleep 120
 
 count=0
 SUBSNAME="ibm-cp4a"
