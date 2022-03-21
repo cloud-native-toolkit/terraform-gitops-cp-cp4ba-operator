@@ -2,7 +2,7 @@
 
 echo 'This script waits until required PVCs for CP4BA is Bound'
 echo 'Sleeping 2m...'
-sleep 2m
+#sleep 2m
 NAMESPACE="$1"
 SLEEP_TIME="15s"
 LIMIT=100
