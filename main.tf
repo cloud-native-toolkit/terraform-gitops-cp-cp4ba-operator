@@ -148,7 +148,7 @@ resource null_resource wait_pvc_yaml {
 }
 
 resource null_resource setup_gitops_wait_pvc {
-  depends_on = [null_resource.wait_pvc_yaml,null_resource.]
+  depends_on = [null_resource.wait_pvc_yaml,null_resource.setup_gitops_pvc]
   
 
   triggers = {
@@ -181,4 +181,3 @@ resource null_resource setup_gitops_wait_pvc {
     }
   }
 }
-
