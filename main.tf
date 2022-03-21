@@ -99,7 +99,7 @@ resource null_resource create_pvc_yaml {
 }
 
 resource null_resource setup_gitops_pvc {
-  depends_on = [null_resource.create_pvc_yaml,setup_gitops_pvc]
+  depends_on = [null_resource.create_pvc_yaml,null_resource.setup_gitops_pvc]
   
 
   triggers = {
