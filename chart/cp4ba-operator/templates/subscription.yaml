@@ -1,9 +1,22 @@
+
+#apiVersion: operators.coreos.com/v1alpha1
+#kind: Subscription
+#metadata:
+#  name: {{ .Values.subscriptions.ibmautomation.name }}
+#  namespace: {{ .Values.subscriptions.ibmautomation.namespace }}
+#  annotations:
+#spec:
+#  {{- toYaml .Values.subscriptions.ibmautomation.subscription | nindent 2 }}
+
+
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
-  name: {{ .Values.subscriptions.ibmautomation.name }}
-  namespace: {{ .Values.subscriptions.ibmautomation.namespace }}
-  annotations:
+  name: cp4a-operator
+  namespace: {{ .Values.cp4ba.namespace }}
 spec:
-  {{- toYaml .Values.subscriptions.ibmautomation.subscription | nindent 2 }}
-
+  channel: {{ .Values.cp4ba.channel }}
+  installPlanApproval: Automatic
+  name: ibm-cp4a-operator
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace

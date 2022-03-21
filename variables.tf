@@ -83,7 +83,7 @@ variable "server_name" {
 variable "channel" {
   type        = string
   description = "The channel that should be used to deploy the operator"
-  default     = "V1.3"
+  default     = "V21.3"
 }
 variable "catalog" {
   type        = string

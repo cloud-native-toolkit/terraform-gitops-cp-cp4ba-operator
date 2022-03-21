@@ -9,7 +9,7 @@ locals {
   #chart_dir = "${path.module}/chart/ibm-cp4ba-operator"
 
   values_content = {
-    "cp4ba-operator" = {
+    "cp4ba" = {
       subscriptions = {
         ibmcp4a = {
           name = "ibm-cp4a"
