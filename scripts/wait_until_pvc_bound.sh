@@ -10,6 +10,8 @@ PVC1="cp4a-shared-log-pvc"
 PVC2= "operator-shared-pvc"
 
 
+
+
 # Check if pods are ready 
 
 if ! ISPRESENT=$(oc get pvc $PVC1 -n $NAMESPACE |  awk '{print $2}' | tail -1); then
