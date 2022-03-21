@@ -50,11 +50,19 @@ resource null_resource create_yaml {
   }
 }
 
+resource null_resource wait_for_pvc {  
 
-
+  provisioner "local-exec" {
+    environment = {
+      KUBECONFIG = module.cluster.config_file_path
+    }
+    interpreter = ["/bin/bash", "-c"]
+    command     = file("${path.module}/scripts/wait_until_pvc_bound.sh")
+  }
+}
 resource null_resource setup_gitops {
   
-  depends_on = [null_resource.setup_gitops_pvc,null_resource.create_yaml]
+  depends_on = [null_resource.wait_for_pvc,null_resource.setup_gitops_pvc,null_resource.create_yaml]
 
   triggers = {
     name = local.name
