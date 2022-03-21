@@ -50,16 +50,6 @@ resource null_resource create_yaml {
   }
 }
 
-resource null_resource wait_for_pvc {  
-
-  provisioner "local-exec" {
-    environment = {
-      KUBECONFIG = module.cluster.config_file_path
-    }
-    interpreter = ["/bin/bash", "-c"]
-    command     = file("${path.module}/scripts/wait_until_pvc_bound.sh")
-  }
-}
 resource null_resource setup_gitops {
   
   depends_on = [null_resource.wait_for_pvc,null_resource.setup_gitops_pvc,null_resource.create_yaml]
@@ -109,7 +99,7 @@ resource null_resource create_pvc_yaml {
 }
 
 resource null_resource setup_gitops_pvc {
-  depends_on = [null_resource.create_pvc_yaml]
+  depends_on = [null_resource.create_pvc_yaml,setup_gitops_pvc]
   
 
   triggers = {
@@ -142,3 +132,53 @@ resource null_resource setup_gitops_pvc {
     }
   }
 }
+
+
+
+#### To wait until pvc is ready
+
+resource null_resource wait_pvc_yaml {
+  provisioner "local-exec" {
+    command = "${path.module}/scripts/wait_until_pvc_bound.sh '${var.namespace}'" 
+
+    environment = {
+      VALUES_CONTENT = yamlencode(local.values_content)
+    }
+  }
+}
+
+resource null_resource setup_gitops_wait_pvc {
+  depends_on = [null_resource.wait_pvc_yaml,null_resource.]
+  
+
+  triggers = {
+    name = local.name
+    namespace = var.namespace
+    yaml_dir = local.yaml_dir_pvc
+    server_name = var.server_name
+    layer = "infrastructure"
+    git_credentials = yamlencode(var.git_credentials)
+    gitops_config   = yamlencode(var.gitops_config)
+    bin_dir = local.bin_dir
+  }
+
+  provisioner "local-exec" {
+    command = "${self.triggers.bin_dir}/igc gitops-module '${self.triggers.name}' -n '${self.triggers.namespace}' --contentDir '${self.triggers.yaml_dir}' --serverName '${self.triggers.server_name}' -l '${self.triggers.layer}' "
+    
+    environment = {
+      GIT_CREDENTIALS = nonsensitive(self.triggers.git_credentials)
+      GITOPS_CONFIG   = self.triggers.gitops_config
+    }
+  }
+
+  provisioner "local-exec" {
+    when = destroy
+    command = "${self.triggers.bin_dir}/igc gitops-module '${self.triggers.name}' -n '${self.triggers.namespace}' --delete --contentDir '${self.triggers.yaml_dir}' --serverName '${self.triggers.server_name}' -l '${self.triggers.layer}' "
+
+    environment = {
+      GIT_CREDENTIALS = nonsensitive(self.triggers.git_credentials)
+      GITOPS_CONFIG   = self.triggers.gitops_config
+    }
+  }
+}
+
