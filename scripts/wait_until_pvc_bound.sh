@@ -36,7 +36,7 @@ while true; do
     echo "Timed out."
     exit 1
   fi
-done
+done   
 
 echo "=== $PVC1 is ready ==="
 
