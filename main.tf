@@ -150,7 +150,7 @@ resource null_resource setup_gitops_pvc {
 
 
 #### To wait until pvc is ready
-
+/*
 resource null_resource wait_pvc_yaml {
   provisioner "local-exec" {
     command = "${path.module}/scripts/wait_until_pvc_bound.sh '${var.namespace}'" 
@@ -195,3 +195,4 @@ resource null_resource setup_gitops_wait_pvc {
     }
   }
 }
+*/
