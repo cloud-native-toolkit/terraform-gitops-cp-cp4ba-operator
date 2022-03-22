@@ -13,9 +13,10 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: cp4a-operator
-  namespace: {{ .Values.subscriptions.ibmautomation.namespace }}
+  #namespace: {{ .Values.subscriptions.ibmautomation.namespace }}
+  namespace: gitops-cp-cp4ba-operator
 spec:
-  channel: {{ .Values.subscriptions.ibmautomation.subscription.channel }}
+  channel: v21.3
   installPlanApproval: Automatic
   name: ibm-cp4a-operator
   source: ibm-operator-catalog

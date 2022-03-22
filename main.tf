@@ -7,10 +7,10 @@ locals {
   service_url   = "http://${local.name}.${var.namespace}"
   subscription_chart_dir = "${path.module}/chart/cp4ba-operator"
   #chart_dir = "${path.module}/chart/ibm-cp4ba-operator"
-
+/*
   values_content = {
     "cp4ba" = {
-      
+
       subscriptions = {
         ibmcp4a = {
           name = "ibm-cp4a"
@@ -27,7 +27,7 @@ locals {
     }
     values_file = "values-${var.server_name}.yaml"   
   }
-
+*/
   layer = "services"
   type  = "base"
   application_branch = "main" 
