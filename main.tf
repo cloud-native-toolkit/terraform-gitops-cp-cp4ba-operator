@@ -29,8 +29,6 @@ locals {
     values_file = "values-${var.server_name}.yaml"   
   }
 */
-
-
   values_content = {
     "cp4ba" = {        
           namespace = var.namespace
