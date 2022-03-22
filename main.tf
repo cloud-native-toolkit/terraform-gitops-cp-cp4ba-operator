@@ -10,6 +10,7 @@ locals {
 
   values_content = {
     "cp4ba" = {
+      
       subscriptions = {
         ibmcp4a = {
           name = "ibm-cp4a"
