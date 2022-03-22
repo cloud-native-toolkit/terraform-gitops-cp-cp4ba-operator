@@ -8,6 +8,7 @@ locals {
   subscription_chart_dir = "${path.module}/chart/cp4ba-operator"
   #chart_dir = "${path.module}/chart/ibm-cp4ba-operator"
 
+/*
   values_content = {
     "cp4ba" = {
 
@@ -27,6 +28,20 @@ locals {
     }
     values_file = "values-${var.server_name}.yaml"   
   }
+*/
+
+
+  values_content = {
+    "cp4ba" = {        
+          namespace = var.namespace
+          channel             = var.channel
+          source              = var.catalog
+          sourcenamespace     = var.catalog_namespace
+          }
+
+    values_file = "values-${var.server_name}.yaml"   
+  }
+
 
   layer = "services"
   type  = "base"

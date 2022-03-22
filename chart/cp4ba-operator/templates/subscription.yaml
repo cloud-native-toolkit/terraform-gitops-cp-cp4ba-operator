@@ -14,10 +14,11 @@ kind: Subscription
 metadata:
   name: cp4a-operator
   #namespace: {{ .Values.subscriptions.ibmautomation.namespace }}
-  namespace: gitops-cp-cp4ba-operator
+  namespace: {{ .Values.cp4ba.namespace }}
+  #namespace: gitops-cp-cp4ba-operator
 spec:
-  channel: v21.3
+  channel: {{ .Values.cp4ba.channel }}
   installPlanApproval: Automatic
   name: ibm-cp4a-operator
-  source: ibm-operator-catalog
-  sourceNamespace: openshift-marketplace
+  source: {{ .Values.cp4ba.source }}
+  sourceNamespace: {{ .Values.cp4ba.sourcenamespace }}
