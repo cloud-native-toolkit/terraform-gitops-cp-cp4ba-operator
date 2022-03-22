@@ -66,8 +66,8 @@ resource null_resource create_yaml {
 
 resource null_resource setup_gitops {
   
-  depends_on = [null_resource.setup_gitops_wait_pvc,null_resource.setup_gitops_pvc,null_resource.create_yaml]
-
+  #depends_on = [null_resource.setup_gitops_wait_pvc,null_resource.setup_gitops_pvc,null_resource.create_yaml]
+  depends_on = [null_resource.create_yaml]
   triggers = {
     name = local.name
     namespace = var.namespace 
@@ -113,8 +113,8 @@ resource null_resource create_pvc_yaml {
 }
 
 resource null_resource setup_gitops_pvc {
-  depends_on = [null_resource.create_pvc_yaml,null_resource.setup_gitops_pvc]
-  
+  #depends_on = [null_resource.create_pvc_yaml,null_resource.setup_gitops_pvc]
+  depends_on = [null_resource.create_pvc_yaml]
 
   triggers = {
     name = local.name
@@ -162,8 +162,8 @@ resource null_resource wait_pvc_yaml {
 }
 
 resource null_resource setup_gitops_wait_pvc {
-  depends_on = [null_resource.wait_pvc_yaml,null_resource.setup_gitops_pvc]
-  
+  #depends_on = [null_resource.wait_pvc_yaml,null_resource.setup_gitops_pvc]
+  depends_on = [null_resource.wait_pvc_yaml]
 
   triggers = {
     name = local.name
