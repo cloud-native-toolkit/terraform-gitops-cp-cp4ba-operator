@@ -34,7 +34,7 @@ locals {
           namespace = var.namespace
           channel             = var.channel
           source              = var.catalog
-          sourcenamespace     = var.catalog_namespace
+          sourceNamespace     = var.catalog_namespace
           }
 
     values_file = "values-${var.server_name}.yaml"   
