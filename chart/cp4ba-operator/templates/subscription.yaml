@@ -8,4 +8,4 @@ spec:
   installPlanApproval: Automatic
   name: ibm-cp4a-operator
   source: {{ .Values.cp4ba.source }}
-  sourceNamespace: {{ .Values.cp4ba.sourcenamespace }}
+  sourceNamespace: {{ .Values.cp4ba.sourceNamespace }}
