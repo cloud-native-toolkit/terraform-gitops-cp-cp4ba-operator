@@ -121,7 +121,8 @@ resource null_resource setup_gitops_pvc {
     namespace = var.namespace
     yaml_dir = local.yaml_dir_pvc
     server_name = var.server_name
-    layer = "infrastructure"
+    #layer = "infrastructure"
+    layer = "services"
     git_credentials = yamlencode(var.git_credentials)
     gitops_config   = yamlencode(var.gitops_config)
     bin_dir = local.bin_dir
