@@ -89,7 +89,7 @@ echo "After the PVC forcibly sleeping for 2 mins"
 #sleep 120
 
 count=0
-SUBSNAME="ibm-cp4a"
+SUBSNAME="cp4a-operator"
 until kubectl get subs "${SUBSNAME}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
   echo "Waiting for Subscription/${SUBSNAME} in ${NAMESPACE} counter=$count"
   count=$((count + 1))
