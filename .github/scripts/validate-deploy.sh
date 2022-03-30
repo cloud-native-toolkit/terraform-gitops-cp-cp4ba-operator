@@ -57,7 +57,8 @@ fi
 ## Check if the subscription for ibm-automation is there 
 SUBSNAME="ibm-automation"
 count=0
-until kubectl get subs "${SUBSNAME}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
+#until kubectl get subs "${SUBSNAME}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
+until kubectl get subs -n "${NAMESPACE}" |grep "${SUBSNAME}" || [[ $count -eq 20 ]]; do
   echo "Waiting for Subscription/${SUBSNAME} in ${NAMESPACE}"
   count=$((count + 1))
   sleep 15
@@ -90,7 +91,7 @@ echo "After the PVC forcibly sleeping for 2 mins"
 
 count=0
 SUBSNAME="cp4a-operator"
-until kubectl get subs "${SUBSNAME}" -n "${NAMESPACE}" || [[ $count -eq 20 ]]; do
+until kubectl get csv -n "${NAMESPACE}" | grep "${SUBSNAME}" || [[ $count -eq 20 ]]; do
   echo "Waiting for Subscription/${SUBSNAME} in ${NAMESPACE} counter=$count"
   count=$((count + 1))
   sleep 15
