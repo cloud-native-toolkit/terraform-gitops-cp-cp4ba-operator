@@ -8,11 +8,14 @@ NAMESPACE="$4"
 
 mkdir -p "${DEST_DIR}"
 
+
 cat > "${DEST_DIR}/pvc_operator_log.yaml" << EOL
 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
   name: cp4a-shared-log-pvc
   namespace: ${NAMESPACE}
   labels:
@@ -34,6 +37,8 @@ cat > "${DEST_DIR}/pvc_operator_shared.yaml" << EOL
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
   name: operator-shared-pvc
   namespace: ${NAMESPACE}
   labels:
