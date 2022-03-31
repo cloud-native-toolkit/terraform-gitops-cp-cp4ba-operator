@@ -65,7 +65,8 @@ variable "git_credentials" {
 
 variable "namespace" {
   type        = string
-  description = "The namespace where the application should be deployed"
+  default = "gitops-cp-cp4ba-operator"
+  description = "The namespace where the application should be deployed" 
 }
 
 variable "kubeseal_cert" {
@@ -78,4 +79,27 @@ variable "server_name" {
   type        = string
   description = "The name of the server"
   default     = "default"
+}
+variable "channel" {
+  type        = string
+  description = "The channel that should be used to deploy the operator"
+  default     = "v21.3"
+}
+variable "catalog" {
+  type        = string
+  description = "The catalog source that should be used to deploy the operator"
+  default     = "ibm-operator-catalog"  
+  
+}
+variable "catalog_namespace" {
+  type        = string   
+  description = "The namespace where the catalog has been deployed"
+  default     = "openshift-marketplace"
+}
+variable "storageclass_operator" {
+  type        = string
+  #default="cp4a-file-retain-gold-gid"
+  #default="ibmc-vpc-block-metro-retain-10iops-tier"
+  default="portworx-db2-rwx-sc"
+  description = "The storge class for operator pvc"
 }

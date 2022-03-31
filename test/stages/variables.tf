@@ -21,6 +21,7 @@ variable "bootstrap_prefix" {
 
 variable "namespace" {
   type        = string
+  default = "cp4ba"
   description = "Namespace for tools"
 }
 
@@ -87,4 +88,43 @@ variable "kubeseal_namespace" {
 }
 
 variable "cp_entitlement_key" {
+}
+
+variable "channel" {
+  type        = string
+  description = "The channel that should be used to deploy the operator"
+  default     = "v21.1"
+}
+variable "catalog" {
+  type        = string
+  description = "The catalog source that should be used to deploy the operator"
+  default     = "ibm-operator-catalog"
+}
+variable "catalog_namespace" {
+  type        = string
+  description = "The namespace where the catalog has been deployed"
+  default     = "openshift-marketplace"
+}
+variable "docker_username" {
+  type        = string
+  default="cp"
+  description = "docker-username"
+}
+
+variable "docker_server" {
+  type        = string
+  default="cp.icr.io"
+  description = "docker-server"
+}
+variable "registry_key_name" {
+  type        = string
+  default="admin.registrykey"
+  description = "registry_key_name"  
+}
+variable "storageclass_operator" {
+  type        = string
+  #default="cp4a-file-retain-gold-gid"
+  #default="ibmc-vpc-block-metro-retain-10iops-tier"
+  default="portworx-db2-rwx-sc"
+  description = "The storge class for operator pvc"
 }
