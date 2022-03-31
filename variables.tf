@@ -142,3 +142,4 @@ variable "registry_key_name" {
   type        = string
   default="admin.registrykey"
   description = "registry_key_name"  
+}
