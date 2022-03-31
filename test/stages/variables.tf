@@ -116,13 +116,15 @@ variable "docker_server" {
   default="cp.icr.io"
   description = "docker-server"
 }
-variable "docker_email" {
-  type        = string
-  default="dineshchandrapandey@in.ibm.com"
-  description = "docker-email"
-}
 variable "registry_key_name" {
   type        = string
   default="admin.registrykey"
   description = "registry_key_name"  
+}
+variable "storageclass_operator" {
+  type        = string
+  #default="cp4a-file-retain-gold-gid"
+  #default="ibmc-vpc-block-metro-retain-10iops-tier"
+  default="portworx-db2-rwx-sc"
+  description = "The storge class for operator pvc"
 }

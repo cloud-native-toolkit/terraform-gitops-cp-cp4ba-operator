@@ -103,18 +103,3 @@ variable "storageclass_operator" {
   default="portworx-db2-rwx-sc"
   description = "The storge class for operator pvc"
 }
-variable "storage_class_gold_name" {
-  type        = string
-  default="cp4a-file-retain-gold-gid"
-  description = "The storge class for the fast acces"
-}
-variable "storage_class_silver_name" {
-  type        = string
-  default="cp4a-file-retain-silver-gid"
-  description = "The storge class for the medium access"
-}
-variable "storage_class_bronze_name" {
-  type        = string
-  default="cp4a-file-retain-bronze-gid"
-  description = "The storge class for the slow access"
-}
