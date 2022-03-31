@@ -141,5 +141,4 @@ variable "docker-email" {
 variable "registry_key_name" {
   type        = string
   default="admin.registrykey"
-  description = "docker-email"
-}
+  description = "registry_key_name"  
