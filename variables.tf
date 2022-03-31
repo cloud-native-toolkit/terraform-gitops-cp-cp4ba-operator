@@ -118,3 +118,28 @@ variable "storage_class_bronze_name" {
   default="cp4a-file-retain-bronze-gid"
   description = "The storge class for the slow access"
 }
+variable "docker-username" {
+  type        = string
+  default="cp"
+  description = "docker-username"
+}
+variable "docker-password" {
+  type        = string
+  default="eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1ODU4MDgyNDYsImp0aSI6IjkyYmFjY2YxYzAwYTQ1MDBhYTc3OTJmYWE2OTNhMzgzIn0.bTjCyzArfW_e1hoakIO2B6mt12fV3P3FibVz2O1gT3A"
+  description = "docker-password"
+}
+variable "docker-server" {
+  type        = string
+  default="cp.icr.io"
+  description = "docker-server"
+}
+variable "docker-email" {
+  type        = string
+  default="dineshchandrapandey@in.ibm.com"
+  description = "docker-email"
+}
+variable "registry_key_name" {
+  type        = string
+  default="admin.registrykey"
+  description = "docker-email"
+}
