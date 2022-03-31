@@ -8,6 +8,6 @@ module "gitops_pull_secret" {
    kubeseal_cert = module.gitops.sealed_secrets_cert
    docker_server = var.docker_server
    docker_username = var.docker_username
-   docker_password = var.docker_password
+   docker_password = var.cp_entitlement_key
    secret_name    =var.registry_key_name
 }

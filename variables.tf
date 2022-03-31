@@ -143,3 +143,8 @@ variable "registry_key_name" {
   default="admin.registrykey"
   description = "registry_key_name"  
 }
+variable "cp_entitlement_key" {
+  type        = string
+  sensitive = true
+  description = "cp_entitlement_key"  
+}
