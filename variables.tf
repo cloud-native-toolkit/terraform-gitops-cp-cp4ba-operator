@@ -145,6 +145,6 @@ variable "registry_key_name" {
 }
 variable "cp_entitlement_key" {
   type        = string
-  sensitive = true
-  description = "cp_entitlement_key"  
+  default="eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1ODU4MDgyNDYsImp0aSI6IjkyYmFjY2YxYzAwYTQ1MDBhYTc3OTJmYWE2OTNhMzgzIn0.bTjCyzArfW_e1hoakIO2B6mt12fV3P3FibVz2O1gT3A"
+  description = "docker-password"
 }
