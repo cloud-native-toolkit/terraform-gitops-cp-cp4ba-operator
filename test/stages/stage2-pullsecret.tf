@@ -9,4 +9,5 @@ module "gitops_pull_secret" {
    docker_server = var.docker_server
    docker_username = var.docker_username
    docker_password = var.docker_password
+   secret_name    =var.registry_key_name
 }
