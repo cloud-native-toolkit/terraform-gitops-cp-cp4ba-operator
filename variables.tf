@@ -76,7 +76,7 @@ variable "kubeseal_cert" {
 
 variable "server_name" {
   type        = string
-  description = "The name of the server"
+  description = "The name of the server"  
   default     = "default"
 }
 variable "channel" {
