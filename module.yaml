@@ -1,8 +1,12 @@
 name: cp4ba-operator
 type: gitops
 description: >-
+<<<<<<< HEAD
   Module to populate a gitops repo with the resources to provision
   cp4ba-operator
+=======
+  Module for gitops deployment of the IBM Cloud Pak for Business Automation (CP4BA) Operator
+>>>>>>> 96525a6e89ff7dfe253c82b5be2a6facd2228ff1
 tags:
   - tools
   - gitops
@@ -40,4 +44,8 @@ versions:
       - name: kubeseal_cert
         moduleRef:
           id: gitops
+<<<<<<< HEAD
           output: sealed_secrets_cert
+=======
+          output: sealed_secrets_cert
+>>>>>>> 96525a6e89ff7dfe253c82b5be2a6facd2228ff1

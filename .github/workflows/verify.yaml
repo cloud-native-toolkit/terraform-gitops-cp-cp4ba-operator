@@ -1,17 +1,16 @@
-name: Verify and release module
+name: Verify
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the main branch
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   verify:
     if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip ci' ) }}
+<<<<<<< HEAD
     runs-on: ubuntu-latest
     container: quay.io/ibmgaragecloud/cli-tools:v0.15
 
@@ -74,35 +73,25 @@ jobs:
           TF_VAR_cp_entitlement_key: ${{ secrets.CP_ENTITLEMENT_KEY }}
           TF_VAR_ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}
           IBMCLOUD_API_KEY: ${{ secrets.IBMCLOUD_API_KEY }}
+=======
+    uses: cloud-native-toolkit/action-workflows/.github/workflows/verify-gitops-module.yaml@v1
+    with:
+      testcase: ocp4_latest_gitops
+    secrets:
+      GIT_ORG: ${{ secrets.GIT_ORG }}
+      AWS_CLUSTER_USERNAME: ${{ secrets.AWS_CLUSTER_USERNAME }}
+      AWS_CLUSTER_PASSWORD: ${{ secrets.AWS_CLUSTER_PASSWORD }}
+      IBMCLOUD_API_KEY: ${{ secrets.IBMCLOUD_API_KEY }}
+      GIT_ADMIN_USERNAME: ${{ secrets.GIT_ADMIN_USERNAME }}
+      GIT_ADMIN_TOKEN: ${{ secrets.GIT_ADMIN_TOKEN }}
+      CP_ENTITLEMENT_KEY: ${{ secrets.CP_ENTITLEMENT_KEY }}
+>>>>>>> 96525a6e89ff7dfe253c82b5be2a6facd2228ff1
 
   verifyMetadata:
-    runs-on: ubuntu-latest
-
-    env:
-      DIST_DIR: ./dist
-      PUBLISH_BRANCH: gh-pages
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - uses: cloud-native-toolkit/action-module-metadata-create@v1
-        with:
-          strict: true
-          validate: true
+    uses: cloud-native-toolkit/action-workflows/.github/workflows/verify-module-metadata.yaml@v1
 
   release:
     needs: [verify, verifyMetadata]
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Drafts your next Release notes as Pull Requests are merged into "main"
-      - uses: release-drafter/release-drafter@v5
-        with:
-          # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
-          config-name: release-drafter.yaml
-          publish: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+    uses: cloud-native-toolkit/action-workflows/.github/workflows/release-module.yaml@v1
+    secrets:
+      TOKEN: ${{ secrets.TOKEN }}
