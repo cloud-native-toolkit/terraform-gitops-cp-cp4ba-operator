@@ -40,8 +40,4 @@ versions:
       - name: kubeseal_cert
         moduleRef:
           id: gitops
-<<<<<<< HEAD
           output: sealed_secrets_cert
-=======
-          output: sealed_secrets_cert
->>>>>>> 96525a6e89ff7dfe253c82b5be2a6facd2228ff1
