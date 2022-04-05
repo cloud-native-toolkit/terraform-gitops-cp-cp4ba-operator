@@ -110,7 +110,6 @@ variable "docker_username" {
   default="cp"
   description = "docker-username"
 }
-
 variable "docker_server" {
   type        = string
   default="cp.icr.io"
