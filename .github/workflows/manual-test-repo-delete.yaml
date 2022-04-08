@@ -7,9 +7,8 @@ on:
         required: true
 
 jobs:
-  delete_repo:
+  delete_repo: 
     if: ${{ github.event.inputs.confirm == 'Delete' }}
-<<<<<<< HEAD
     runs-on: ubuntu-latest
     steps:
       - id: variables
@@ -43,9 +42,3 @@ jobs:
           fi
 
           gh repo delete ${GIT_SLUG} --confirm
-=======
-    uses: cloud-native-toolkit/action-workflows/.github/workflows/manual-test-repo-delete.yaml@v1
-    secrets:
-      GIT_ORG: ${{ secrets.GIT_ORG }}
-      GIT_ADMIN_TOKEN: ${{ secrets.GIT_ADMIN_TOKEN }}
->>>>>>> 96525a6e89ff7dfe253c82b5be2a6facd2228ff1
