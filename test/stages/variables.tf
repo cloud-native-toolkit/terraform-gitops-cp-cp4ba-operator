@@ -41,7 +41,7 @@ variable "cluster_exists" {
   description = "Flag indicating if the cluster already exists (true or false)"
   default     = "true"
 }
-
+  
 variable "name_prefix" {
   type        = string
   description = "Prefix name that should be used for the cluster and services. If not provided then resource_group_name will be used"
