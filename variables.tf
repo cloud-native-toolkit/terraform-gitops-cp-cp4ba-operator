@@ -65,7 +65,7 @@ variable "git_credentials" {
 
 variable "namespace" {
   type        = string
-  description = "The namespace where the application should be deployed" 
+  description = "The namespace where the application should be deployed"  
 }
 
 variable "kubeseal_cert" {
