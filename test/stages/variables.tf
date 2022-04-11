@@ -125,5 +125,5 @@ variable "storageclass_operator" {
   #default="cp4a-file-retain-gold-gid"
   #default="ibmc-vpc-block-metro-retain-10iops-tier"
   default="portworx-db2-rwx-sc"
-  description = "The storge class for operator pvc"
+  description = "The storge class for operator pvc" 
 }
