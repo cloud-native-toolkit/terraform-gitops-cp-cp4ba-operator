@@ -1,5 +1,5 @@
 cp4ba:
- namespace: gitops-cp-cp4ba-operator
+ namespace: gitops-cp4ba-operator
  channel: v21.3
  name: ibm-cp4a-operator
  source: ibm-operator-catalog
