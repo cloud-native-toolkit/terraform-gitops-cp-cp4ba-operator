@@ -14,8 +14,9 @@ cp -R "${CHART_DIR}"/* "${DEST_DIR}"
 
 echo "**** Copied ${CHART_DIR} to   ${DEST_DIR}  ****"
 
-#if [[ -n "${VALUES_CONTENT}" ]]; then
-#  echo "${VALUES_CONTENT}" > "${DEST_DIR}/values.yaml}"
-#fi
+if [[ -n "${VALUES_CONTENT}" ]]; then
+  echo "${VALUES_CONTENT}" > "${DEST_DIR}/values.yaml"
+  echo "Copied the custom values to the values.yaml file ${VALUES_CONTENT}"
+fi
 
 find "${DEST_DIR}" -name "*"

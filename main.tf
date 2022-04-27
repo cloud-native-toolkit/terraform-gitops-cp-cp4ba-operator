@@ -8,27 +8,6 @@ locals {
   subscription_chart_dir = "${path.module}/chart/cp4ba-operator"
   #chart_dir = "${path.module}/chart/ibm-cp4ba-operator"
 
-/*
-  values_content = {
-    "cp4ba" = {
-
-      subscriptions = {
-        ibmcp4a = {
-          name = "ibm-cp4a"
-          namespace = var.namespace
-          subscription = {
-            channel             = var.channel
-            installPlanApproval = "Automatic"
-            name                = "ibm-cp4a-operator"
-            source              = var.catalog
-            sourceNamespace     = var.catalog_namespace
-          }
-        }
-      }
-    }
-    values_file = "values-${var.server_name}.yaml"   
-  }
-*/
   values_content = {
     "cp4ba" = {        
           namespace = var.namespace
